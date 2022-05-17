@@ -1,0 +1,19 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0fa49cc9dc8d62c84
+      SecurityGroupIds:
+        - !Ref SSHSecurityGroup
+  SSHSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      VpcId: vpc-0f2ba9842f182c9d2
+      GroupName: BiteMyAssGroup
+      GroupDescription: Enable HTTPS access
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 443
+          IpProtocol: tcp
+          ToPort: 443
